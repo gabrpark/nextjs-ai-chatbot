@@ -21,8 +21,8 @@ export const Overview = () => {
         </p>
         <p>
           This is Career Accelerator Chatbot built with Next.js and the AI
-          SDK by Vercel. Currently, it uses the data posted on the Facebook
-          Group posts as the source of information.
+          SDK by Vercel. Currently, it uses the data on the Facebook Group posts
+          as the context for the chatbot.
         </p>
       </div>
     </motion.div>
