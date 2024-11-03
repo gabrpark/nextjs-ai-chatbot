@@ -20,23 +20,9 @@ export const Overview = () => {
           <MessageIcon size={32} />
         </p>
         <p>
-          This is an open source Chatbot template built with Next.js and the AI
-          SDK by Vercel. It uses the{' '}
-          <code className="rounded-md bg-muted px-1 py-0.5">streamText</code>{' '}
-          function in the server and the{' '}
-          <code className="rounded-md bg-muted px-1 py-0.5">useChat</code> hook
-          on the client to create a seamless chat experience.
-        </p>
-        <p>
-          You can learn more about the AI SDK by visiting the{' '}
-          <Link
-            className="font-medium underline underline-offset-4"
-            href="https://sdk.vercel.ai/docs"
-            target="_blank"
-          >
-            docs
-          </Link>
-          .
+          This is Career Accelerator Chatbot built with Next.js and the AI
+          SDK by Vercel. Currently, it uses the data posted on the Facebook
+          Group posts as the source of information.
         </p>
       </div>
     </motion.div>
