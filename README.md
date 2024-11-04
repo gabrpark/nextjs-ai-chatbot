@@ -103,7 +103,7 @@ The project is functional with basic RAG implementation but requires several opt
 - User feedback integration
 - A/B testing framework
 
-<!-- ## 🤝 Contributing -->
+## 🤝 Contributing
 
 [contribution guidelines]
 
