@@ -2,10 +2,10 @@ import { convertToCoreMessages, Message, streamText } from 'ai';
 import { z } from 'zod';
 
 import { customModel } from '@/ai';
+import { enhanceWithRAG } from '@/ai/rag-middleware'; // Import the RAG middleware (added)
 import { auth } from '@/app/(auth)/auth';
 import { deleteChatById, getChatById, saveChat } from '@/db/queries';
 import { Model, models } from '@/lib/model';
-import { enhanceWithRAG } from '@/ai/rag-middleware'; // Import the RAG middleware (added)
 
 export async function POST(request: Request) {
   const {
