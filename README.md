@@ -4,19 +4,19 @@ A conversational AI system leveraging Retrieval-Augmented Generation (RAG) to pr
 
 ## 🌟 Features
 
-- **RAG Implementation**: Uses LangChain framework for context-aware responses
-- **Vector Database**: Pinecone for efficient similarity search of context data
+- **RAG Implementation**: Uses [LangChain](https://langchain.com/) framework for context-aware responses
+- **Vector Database**: [Pinecone](https://www.pinecone.io/) for efficient similarity search of context data
 - **Multiple LLM Support**: 
-  - OpenAI GPT-4-turbo and GPT-4-turbo-mini
-  - Future integration planned for Anthropic Claude and AWS Bedrock (Llama)
+  - [OpenAI](https://openai.com/) GPT-4o and GPT-4o-mini
+  - Future integration planned for [Anthropic Claude](https://www.anthropic.com/products/claude-3-sonnet) and [AWS Bedrock (Llama)](https://aws.amazon.com/bedrock/)
 - **Data Processing Pipeline**:
   - Source: FB group posts/comments
-  - Storage: AWS/MongoDB
+  - Storage: [AWS DynamoDB](https://aws.amazon.com/dynamodb/) / [MongoDB](https://www.mongodb.com/)
   - Processing: Text chunking and embedding
   - Vector Storage: Pinecone (using OpenAI ada embedding model)
 - **Database**: 
-  - Current: Neon
-  - Planned Migration: Supabase (will include authentication)
+  - Current: [Neon](https://neon.tech/)
+  - Planned Migration: [Supabase](https://supabase.com/) (will include authentication)
 
 ## 🏗️ Architecture
 
@@ -59,19 +59,19 @@ graph LR
 - **LLM Framework**: LangChain
 - **Language Models**:
   - OpenAI ada (embeddings)
-  - GPT-4-turbo
-  - GPT-4-turbo-mini
+  - GPT-4o
+  - GPT-4o-mini
 - **Database**: 
   - Current: Neon
   - Planned: Supabase
-- **Data Storage**: AWS/MongoDB
+- **Data Storage**: AWS DynamoDB/MongoDB
 
 ## 📝 Prerequisites
 
 - Pinecone API key
 - OpenAI API key
 - Neon/Supabase database credentials
-- AWS/MongoDB access credentials
+- AWS DynamoDB/MongoDB access credentials
 
 ## 🔄 Current Status
 
