@@ -8,7 +8,7 @@ A conversational AI system leveraging Retrieval-Augmented Generation (RAG) to pr
 - **Vector Database**: [Pinecone](https://www.pinecone.io/) for efficient similarity search of context data
 - **Multiple LLM Support**: 
   - [OpenAI](https://openai.com/) GPT-4o and GPT-4o-mini
-  - Future integration planned for [Anthropic Claude](https://www.anthropic.com/products/claude-3-sonnet) and [AWS Bedrock (Llama)](https://aws.amazon.com/bedrock/)
+  - Future integration planned for [Anthropic Claude](https://www.anthropic.com/products/claude-3-sonnet) and [AWS Bedrock](https://aws.amazon.com/bedrock/) (Llama 3.x)
 - **Data Processing Pipeline**:
   - Source: FB group posts/comments
   - Storage: [AWS DynamoDB](https://aws.amazon.com/dynamodb/) / [MongoDB](https://www.mongodb.com/)
