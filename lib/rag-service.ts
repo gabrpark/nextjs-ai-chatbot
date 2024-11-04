@@ -16,7 +16,7 @@ export class RAGService {
 			apiKey: process.env.OPENAI_API_KEY
 		})
 		this.indexName = process.env.PINECONE_INDEX_NAME || 'default-index'
-		this.namespace = process.env.PINECONE_NAMESPACE || 'docs'
+		this.namespace = process.env.PINECONE_NAMESPACE || 'default-namespace'
 	}
 
 	public static getInstance(): RAGService {
