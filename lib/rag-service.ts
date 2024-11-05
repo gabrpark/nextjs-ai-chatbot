@@ -48,7 +48,7 @@ export class RAGService {
 				topK: 3,
 				includeMetadata: true
 			})
-			console.log(queryResponse)
+
 			if (!queryResponse.matches?.length) {
 				return null
 			}
