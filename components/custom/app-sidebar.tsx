@@ -41,7 +41,7 @@ export function AppSidebar({ user }: { user: User | undefined }) {
             <SidebarMenuButton asChild>
               <Link href="/" onClick={() => setOpenMobile(false)}>
                 <span className="text-lg font-semibold font-mono tracking-tighter">
-                  Chatbot
+                  CA Chatbot
                 </span>
               </Link>
             </SidebarMenuButton>
