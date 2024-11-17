@@ -77,7 +77,7 @@ graph LR
 
 The project is functional with basic RAG implementation but requires several optimizations and feature additions. Key areas of focus are:
 
-1. Migration to Supabase for improved auth and data management
+1. Migration to Supabase for improved auth and data management (in progress)
 2. Implementation of usage tracking and billing
 3. Enhanced RAG techniques for better response accuracy
 4. Development of admin dashboard for monitoring and analytics
@@ -102,11 +102,3 @@ The project is functional with basic RAG implementation but requires several opt
 - Performance optimization
 - User feedback integration
 - A/B testing framework
-
-## 🤝 Contributing
-
-[contribution guidelines]
-
-## 📄 License
-
-[license information]
