@@ -41,6 +41,57 @@ import {
 import { Chat } from '@/db/schema';
 import { fetcher, getTitleFromChat } from '@/lib/utils';
 
+function ChatMenuItem({
+  chat,
+  isActive,
+  onDelete,
+  onMobileClose
+}: {
+  chat: Chat;
+  isActive: boolean;
+  onDelete: (chatId: string) => void;
+  onMobileClose: () => void;
+}) {
+  const [isOpen, setIsOpen] = useState(false);
+
+  return (
+    <SidebarMenuItem>
+      <SidebarMenuButton asChild isActive={isActive}>
+        <Link href={`/chat/${chat.id}`} onClick={onMobileClose}>
+          <span>{getTitleFromChat(chat)}</span>
+        </Link>
+      </SidebarMenuButton>
+      <DropdownMenu open={isOpen} onOpenChange={setIsOpen}>
+        <DropdownMenuTrigger asChild>
+          <SidebarMenuAction
+            className="data-[state=open]:bg-sidebar-accent data-[state=open]:text-sidebar-accent-foreground"
+            showOnHover={!isActive}
+          >
+            <MoreHorizontalIcon />
+            <span className="sr-only">More</span>
+          </SidebarMenuAction>
+        </DropdownMenuTrigger>
+        <DropdownMenuContent
+          side="bottom"
+          align="end"
+          onCloseAutoFocus={(e) => e.preventDefault()}
+        >
+          <DropdownMenuItem
+            className="text-destructive focus:bg-destructive/15 focus:text-destructive"
+            onClick={() => {
+              setIsOpen(false);
+              onDelete(chat.id);
+            }}
+          >
+            <TrashIcon />
+            <span>Delete</span>
+          </DropdownMenuItem>
+        </DropdownMenuContent>
+      </DropdownMenu>
+    </SidebarMenuItem>
+  );
+}
+
 export function SidebarHistory({ user }: { user: User | undefined }) {
   const { setOpenMobile } = useSidebar();
   const { id } = useParams();
@@ -96,6 +147,11 @@ export function SidebarHistory({ user }: { user: User | undefined }) {
       console.error('Delete chat error:', error);
       toast.error('Failed to delete chat');
     }
+  };
+
+  const handleDeleteTrigger = (chatId: string) => {
+    setDeleteId(chatId);
+    setShowDeleteDialog(true);
   };
 
   if (!user) {
@@ -163,42 +219,15 @@ export function SidebarHistory({ user }: { user: User | undefined }) {
         <SidebarGroupLabel>History</SidebarGroupLabel>
         <SidebarGroupContent>
           <SidebarMenu>
-            {history &&
-              history.map((chat) => (
-                <SidebarMenuItem key={chat.id}>
-                  <SidebarMenuButton asChild isActive={chat.id === id}>
-                    <Link
-                      href={`/chat/${chat.id}`}
-                      onClick={() => setOpenMobile(false)}
-                    >
-                      <span>{getTitleFromChat(chat)}</span>
-                    </Link>
-                  </SidebarMenuButton>
-                  <DropdownMenu modal={true}>
-                    <DropdownMenuTrigger asChild>
-                      <SidebarMenuAction
-                        className="data-[state=open]:bg-sidebar-accent data-[state=open]:text-sidebar-accent-foreground"
-                        showOnHover={chat.id !== id}
-                      >
-                        <MoreHorizontalIcon />
-                        <span className="sr-only">More</span>
-                      </SidebarMenuAction>
-                    </DropdownMenuTrigger>
-                    <DropdownMenuContent side="bottom" align="end">
-                      <DropdownMenuItem
-                        className="text-destructive focus:bg-destructive/15 focus:text-destructive"
-                        onSelect={() => {
-                          setDeleteId(chat.id);
-                          setShowDeleteDialog(true);
-                        }}
-                      >
-                        <TrashIcon />
-                        <span>Delete</span>
-                      </DropdownMenuItem>
-                    </DropdownMenuContent>
-                  </DropdownMenu>
-                </SidebarMenuItem>
-              ))}
+            {history?.map((chat) => (
+              <ChatMenuItem
+                key={chat.id}
+                chat={chat}
+                isActive={chat.id === id}
+                onDelete={handleDeleteTrigger}
+                onMobileClose={() => setOpenMobile(false)}
+              />
+            ))}
           </SidebarMenu>
         </SidebarGroupContent>
       </SidebarGroup>
