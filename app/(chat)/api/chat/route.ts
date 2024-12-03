@@ -76,53 +76,6 @@ export async function POST(request: Request) {
   return result.toDataStreamResponse({})
 }
 
-//   const coreMessages = convertToCoreMessages(messages);
-
-//   const result = await streamText({
-//     model: customModel(model),
-//     system:
-//       'you are a friendly assistant! keep your responses concise and helpful.',
-//     messages: coreMessages,
-//     maxSteps: 5,
-//     tools: {
-//       getWeather: {
-//         description: 'Get the current weather at a location',
-//         parameters: z.object({
-//           latitude: z.number(),
-//           longitude: z.number(),
-//         }),
-//         execute: async ({ latitude, longitude }) => {
-//           const response = await fetch(
-//             `https://api.open-meteo.com/v1/forecast?latitude=${latitude}&longitude=${longitude}&current=temperature_2m&hourly=temperature_2m&daily=sunrise,sunset&timezone=auto`
-//           );
-
-//           const weatherData = await response.json();
-//           return weatherData;
-//         },
-//       },
-//     },
-//     onFinish: async ({ responseMessages }) => {
-//       if (session.user && session.user.id) {
-//         try {
-//           await saveChat({
-//             id,
-//             messages: [...coreMessages, ...responseMessages],
-//             userId: session.user.id,
-//           });
-//         } catch (error) {
-//           console.error('Failed to save chat');
-//         }
-//       }
-//     },
-//     experimental_telemetry: {
-//       isEnabled: true,
-//       functionId: 'stream-text',
-//     },
-//   });
-
-//   return result.toDataStreamResponse({});
-// }
-
 export async function DELETE(request: Request) {
   const { searchParams } = new URL(request.url);
   const id = searchParams.get('id');
