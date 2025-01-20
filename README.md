@@ -15,8 +15,7 @@ A conversational AI system leveraging Retrieval-Augmented Generation (RAG) to pr
   - Processing: Text chunking and embedding
   - Vector Storage: Pinecone (using OpenAI ada embedding model)
 - **Database**: 
-  - Current: [Neon](https://neon.tech/)
-  - Planned Migration: [Supabase](https://supabase.com/) (will include authentication)
+  - [Neon](https://neon.tech/)
 
 ## 🏗️ Architecture
 
@@ -62,15 +61,14 @@ graph LR
   - GPT-4o
   - GPT-4o-mini
 - **Database**: 
-  - Current: Neon
-  - Planned: Supabase
+  - Neon
 - **Data Storage**: AWS DynamoDB/MongoDB
 
 ## 📝 Prerequisites
 
 - Pinecone API key
 - OpenAI API key
-- Neon/Supabase database credentials
+- Neon database credentials
 - AWS DynamoDB/MongoDB access credentials
 
 ## 🔄 Current Status
