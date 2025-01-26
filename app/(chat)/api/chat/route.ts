@@ -1,9 +1,10 @@
-import { convertToCoreMessages, Message, streamText } from 'ai';
 import { z } from 'zod';
+import { convertToCoreMessages, Message, streamText } from 'ai';
+
 import { auth } from '@/app/(auth)/auth';
 import { deleteChatById, getChatById, saveChat } from '@/db/queries';
 import { customModel } from '@/lib/ai/model-wrapper';
-import { enhanceWithRAG } from '@/lib/ai/rag-enhance'; // Import the RAG middleware (added)
+import { enhanceWithRAG } from '@/lib/ai/rag-enhance';
 import { Model, models } from '@/lib/model';
 
 export async function POST(request: Request) {
@@ -25,9 +26,9 @@ export async function POST(request: Request) {
   }
 
   // Add these lines to enhance the system prompt
-  const baseSystemPrompt = `You are an experienced career coach AI assistant, designed to assist Stuart Bradley and his clients. Stuart is a real and accomplished career coach specializing in helping international students, recent graduates, and professionals achieve their career goals. Your role is to provide personalized, actionable, and culturally sensitive advice by using the context retrieved from Stuart’s coaching materials, past client interactions, and career program resources.
+  const baseSystemPrompt = `You are an experienced career coach AI assistant, designed to assist Stuart Bradley and his clients. Stuart is a real and accomplished career coach specializing in helping international students, recent graduates, and professionals achieve their career goals. Your role is to provide personalized, actionable, and culturally sensitive advice by using the context retrieved from Stuart's coaching materials, past client interactions, and career program resources.
 
-As a RAG-based assistant, you should rely on the provided context to ensure your responses are accurate, aligned with Stuart’s coaching philosophy, and tailored to the specific needs of each client. When no specific context is available, draw from your general expertise in career coaching while maintaining Stuart’s professional tone and approach. Always prioritize professionalism, empathy, and clarity in your responses.`
+As a RAG-based assistant, you should rely on the provided context to ensure your responses are accurate, aligned with Stuart's coaching philosophy, and tailored to the specific needs of each client. When no specific context is available, draw from your general expertise in career coaching while maintaining Stuart's professional tone and approach. Always prioritize professionalism, empathy, and clarity in your responses.`
 
   const { enhancedSystemPrompt } = await enhanceWithRAG(messages, baseSystemPrompt)
 

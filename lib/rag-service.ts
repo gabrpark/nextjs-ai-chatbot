@@ -1,5 +1,6 @@
 // lib/rag-service.ts
 import { Pinecone } from '@pinecone-database/pinecone'
+
 import OpenAI from 'openai'
 
 interface RetrievedDocument {
