@@ -3,7 +3,7 @@ import { z } from 'zod';
 
 import { auth } from '@/app/(auth)/auth';
 import { deleteChatById, getChatById, saveChat } from '@/db/queries';
-import { customModel } from '@/lib/ai/model-wrapper';
+import { customModel } from '@/lib/ai';
 import { enhanceWithRAG } from '@/lib/ai/rag-enhance';
 import { Model, models } from '@/lib/model';
 
