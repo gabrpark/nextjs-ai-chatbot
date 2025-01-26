@@ -6,7 +6,12 @@ import { LoaderIcon } from "@/components/custom/icons";
 
 import { Button } from "../ui/button";
 
-export function SubmitButton({ children }: { children: React.ReactNode }) {
+interface SubmitButtonProps {
+  children: React.ReactNode;
+  isSuccessful?: boolean;
+}
+
+export function SubmitButton({ children, isSuccessful }: SubmitButtonProps) {
   const { pending } = useFormStatus();
 
   return (
