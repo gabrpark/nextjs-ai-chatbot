@@ -1,5 +1,6 @@
 // ai/rag-middleware.ts
 import { Message } from 'ai'
+
 import { ragService } from '@/lib/rag-service'
 
 export async function enhanceWithRAG(
