@@ -1,7 +1,7 @@
 // lib/rag-service.ts
 import { Pinecone } from '@pinecone-database/pinecone'
+// import { pipeline } from '@xenova/transformers'
 import OpenAI from 'openai'
-import { pipeline } from '@xenova/transformers'
 
 interface RetrievedDocument {
 	text: string;
