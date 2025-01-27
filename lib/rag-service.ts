@@ -1,6 +1,7 @@
 // lib/rag-service.ts
 import { Pinecone } from '@pinecone-database/pinecone'
 import OpenAI from 'openai'
+import { pipeline } from '@xenova/transformers'
 
 interface RetrievedDocument {
 	text: string;
@@ -40,28 +41,46 @@ export class RAGService {
 		return response.data[0].embedding
 	}
 
-	private async rerank(documents: RetrievedDocument[], query: string): Promise<RetrievedDocument[]> {
-		const rerankedDocs = await Promise.all(
-			documents.map(async (doc) => {
-				const completion = await this.openai.chat.completions.create({
-					model: "gpt-3.5-turbo",
-					messages: [
-						{
-							role: "system",
-							content: "Rate the relevance of this document to the query on a scale of 0-10."
-						},
-						{
-							role: "user",
-							content: `Query: ${query}\nDocument: ${doc.text}\n\nProvide only the numerical score.`
-						}
-					],
-					temperature: 0,
-				});
+	private calculateBM25Score(doc: string, query: string): number {
+		// BM25 parameters
+		const k1 = 1.5;  // term frequency saturation parameter
+		const b = 0.75;  // length normalization parameter
+		const avgDocLength = 500;  // can be adjusted based on your corpus
 
-				const score = parseFloat(completion.choices[0].message.content || "0");
-				return { ...doc, score: score };
-			})
-		);
+		const docTerms = doc.toLowerCase().split(/\s+/);
+		const queryTerms = query.toLowerCase().split(/\s+/);
+		const docLength = docTerms.length;
+
+		let score = 0;
+		const termFrequencies: { [key: string]: number } = {};
+
+		// Calculate term frequencies in document
+		docTerms.forEach(term => {
+			termFrequencies[term] = (termFrequencies[term] || 0) + 1;
+		});
+
+		// Calculate BM25 score for each query term
+		queryTerms.forEach(term => {
+			if (termFrequencies[term]) {
+				const tf = termFrequencies[term];
+				// Simplified IDF calculation
+				const idf = Math.log(1 + Math.abs(1 / (termFrequencies[term] || 0.5)));
+
+				const numerator = tf * (k1 + 1);
+				const denominator = tf + k1 * (1 - b + b * (docLength / avgDocLength));
+
+				score += idf * (numerator / denominator);
+			}
+		});
+
+		return score;
+	}
+
+	private async rerank(documents: RetrievedDocument[], query: string): Promise<RetrievedDocument[]> {
+		const rerankedDocs = documents.map(doc => ({
+			...doc,
+			score: this.calculateBM25Score(doc.text, query)
+		}));
 
 		return rerankedDocs.sort((a, b) => b.score - a.score);
 	}
